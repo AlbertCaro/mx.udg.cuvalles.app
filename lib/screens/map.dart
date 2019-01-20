@@ -1,20 +1,19 @@
+import 'package:app/models/place.dart';
 import 'package:app/tabs/map.dart';
 import 'package:flutter/material.dart';
 
 class MapScreen extends StatelessWidget {
-  MapScreen(this.title, this.lat, this.lon);
-
-  final String title;
-  final double lat, lon;
+  MapScreen({this.place});
+  final Place place;
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(place.name),
       ),
-      body: MapTab(lat, lon),
+      body: MapTab(place: place),
     );
   }
 

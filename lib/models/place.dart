@@ -28,10 +28,7 @@ class Place {
         LatLng(double.parse(lat), double.parse(lon))
       );
 
-      if (mts < 1000)
-        return mts.toInt().toString()+" mts";
-      else
-        return (mts/1000).toStringAsFixed(2)+" km";
+      return (mts < 1000) ? mts.toInt().toString()+" mts" : (mts/1000).toStringAsFixed(2)+" km";
     }
     return '';
   }

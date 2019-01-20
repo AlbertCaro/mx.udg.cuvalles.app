@@ -1,3 +1,4 @@
+import 'package:app/models/place.dart';
 import 'package:app/screens/preferences.dart';
 import 'package:app/tabs/map.dart';
 import 'package:app/tabs/moodle.dart';
@@ -63,10 +64,11 @@ class HomePageState extends State<HomePage> {
       WebTab(),
       MoodleTab(),
       MessagesTab(),
-      MapTab(20.5366296, -103.9672237),
+      MapTab(),
       PlacesTab(this.locationStatus, this.position),
       QRTab()
     ];
+
     checkPermissions();
   }
 

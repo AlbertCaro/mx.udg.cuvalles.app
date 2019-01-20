@@ -38,17 +38,26 @@ class PlacesState extends State<PlacesTab> {
 
   
   void loadPlaces() {
-    print('Entró 4');
     body = Center(child: CircularProgressIndicator());
     Place.consultAPI().then((list) {
-      places = list.map((json) => Place.fromJSON(json)).toList();
-      body = ListView.builder(
-        itemBuilder: (_, int index) => ItemList(this.places[index], this.locationStatus, this.position),
-        itemCount: this.places.length,
-      );
+      if(list.isEmpty) {
+        body = errorWidget(
+          icon: Icons.signal_wifi_off,
+          title: 'No se ha podido contactar con el servidor',
+          message: 'Revise su conexión',
+          buttonText: 'Reintentar',
+          onPressed: loadPlaces,
+        );
+      } else {
+        places = list.map((json) => Place.fromJSON(json)).toList();
+        body = ListView.builder(
+          itemBuilder: (_, int index) => ItemList(this.places[index], this.locationStatus, this.position),
+          itemCount: this.places.length,
+        );
+      }
       setState(() {});
     }).catchError((error) {
-      errorWidget(
+      body = errorWidget(
         icon: Icons.signal_wifi_off,
         title: 'No se ha podido contactar con el servidor',
         message: 'Revise su conexión',
@@ -58,18 +67,6 @@ class PlacesState extends State<PlacesTab> {
     });
   }
 }
-
-/*class ItemList extends StatefulWidget {
-  ItemList(this.place, this.locationStatus, this.position);
-
-  final Place place;
-  bool locationStatus;
-  Position position;
-
-  @override
-  ItemListState createState() => ItemListState(this.place, this.locationStatus, this.position);
-
-}*/
 
 class ItemList extends StatelessWidget {
 
@@ -174,11 +171,7 @@ class ItemList extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => MapScreen(
-                                  place.name,
-                                  double.parse(place.lat),
-                                  double.parse(place.lon)
-                                )
+                                builder: (context) => MapScreen(place: place)
                               )
                             );
                           },

@@ -1,4 +1,4 @@
-import 'package:app/screens/app.dart';
+import 'package:app/screens/introduction.dart';
 import 'package:app/values/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
@@ -16,7 +16,7 @@ class SplashState extends State<Splash> {
 
     return SplashScreen(
       seconds: 3,
-      navigateAfterSeconds: App(),
+      navigateAfterSeconds: Introduction(),
       image: Image.asset('assets/images/logo.png'),
       photoSize: 150,
       backgroundColor: PRIMARY_COLOR,
