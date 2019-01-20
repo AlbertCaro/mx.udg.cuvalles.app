@@ -1,0 +1,37 @@
+name: app
+description: Aplicación del Centro Universitario de los Valles.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  cupertino_icons: ^0.1.2
+  splashscreen: ^1.1.0
+  qr_code_scanner: ^0.0.2
+  material_design_icons_flutter: ^3.0.3392
+  flutter_native_web: "^1.0.1"
+  google_maps_flutter: ^0.0.3+3
+  http: ^0.12.0+1
+  cached_network_image: ^0.5.1
+  permission_handler: ^2.1.2
+  latlong: ^0.6.1
+  geolocator: ^2.1.1
+  permission: ^0.1.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/logo.png
+    - assets/images/header.jpg
