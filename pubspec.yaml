@@ -1,4 +1,4 @@
-name: app
+name: CUValles
 description: Aplicación del Centro Universitario de los Valles.
 
 version: 1.0.0+1
@@ -14,7 +14,6 @@ dependencies:
   splashscreen: ^1.1.0
   qr_code_scanner: ^0.0.2
   material_design_icons_flutter: ^3.0.3392
-  flutter_native_web: "^1.0.1"
   google_maps_flutter: ^0.0.3+3
   http: ^0.12.0+1
   cached_network_image: ^0.5.1
@@ -23,6 +22,15 @@ dependencies:
   geolocator: ^2.1.1
   permission: ^0.1.0
   intro_views_flutter: ^2.4.0
+  firebase_messaging: ^2.1.0
+  connectivity: ^0.3.2
+  webview_flutter: ^0.2.0
+  flutter_webview_plugin: ^0.3.0+2
+  intro_slider: ^1.1.4
+  url_launcher: ^4.2.0+1
+  package_info: ^0.4.0
+  device_info: ^0.4.0
+  flutter_search_bar: ^2.0.7
 
 
 dev_dependencies:
@@ -36,3 +44,5 @@ flutter:
   assets:
     - assets/images/logo.png
     - assets/images/header.jpg
+    - assets/images/introduction/map.png
+    - assets/images/login_background.png

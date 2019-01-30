@@ -1,3 +1,5 @@
+import 'package:CUValles/models/message.dart';
+import 'package:CUValles/values/constants.dart';
 import 'package:flutter/material.dart';
 
 class MessagesTab extends StatefulWidget {
@@ -7,12 +9,65 @@ class MessagesTab extends StatefulWidget {
 }
 
 class MessagesState extends State<MessagesTab> {
+  List<Message> list = [
+    Message("Dos", "Prueba"),
+    Message("Uno", "Prueba"),
+  ];
 
   @override
   Widget build(BuildContext context) {
     
-    return Center(
-      child: Text("Messages"),
+    return Container(
+      color: LIST_BACKGROUND_COLOR,
+      child: ListView.builder(
+        reverse: true,
+        itemBuilder: (BuildContext context, int index) => ItemList(this.list[index]),
+        itemCount: this.list.length,
+      ),
+    );
+  }
+
+}
+
+class ItemList extends StatelessWidget {
+  ItemList(this.message);
+  final Message message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Container(
+        padding: EdgeInsets.all(16),
+        child: Row(
+          children: <Widget>[
+            CircleAvatar(
+              backgroundImage: NetworkImage("https://avatarfiles.alphacoders.com/103/103117.gif"),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width-80,
+              padding: EdgeInsets.only(left: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    message.subject,
+                    style: TextStyle(fontSize: 18.0),
+                    textAlign: TextAlign.left,
+                  ),
+                  Text(
+                    message.content,
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      color: Colors.black54
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 

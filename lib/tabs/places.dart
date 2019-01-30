@@ -1,13 +1,14 @@
-import 'package:app/models/place.dart';
-import 'package:app/screens/map.dart';
-import 'package:app/values/constants.dart';
-import 'package:app/values/functions.dart';
+import 'package:CUValles/widgets/errormessage.dart';
+import 'package:CUValles/models/place.dart';
+import 'package:CUValles/screens/map.dart';
+import 'package:CUValles/screens/placedetail.dart';
+import 'package:CUValles/values/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:geolocator/geolocator.dart';
 
 class PlacesTab extends StatefulWidget {
-  PlacesTab(this.locationStatus, this.position);
+  PlacesTab(Key key, this.locationStatus, this.position) : super(key: key);
   final bool locationStatus;
   final Position position;
 
@@ -19,7 +20,8 @@ class PlacesState extends State<PlacesTab> {
   PlacesState(this.locationStatus, this.position);
   
   Widget body = Center(child: CircularProgressIndicator());
-  List<dynamic> places = [];
+  List<dynamic> places;
+  List<dynamic> showedList;
   bool locationStatus;
   Position position;
 
@@ -35,13 +37,13 @@ class PlacesState extends State<PlacesTab> {
     super.initState();
     loadPlaces();
   }
-
   
   void loadPlaces() {
     body = Center(child: CircularProgressIndicator());
     Place.consultAPI().then((list) {
+      print('zi');
       if(list.isEmpty) {
-        body = errorWidget(
+        body = ErrorMessage(
           icon: Icons.signal_wifi_off,
           title: 'No se ha podido contactar con el servidor',
           message: 'Revise su conexión',
@@ -50,14 +52,15 @@ class PlacesState extends State<PlacesTab> {
         );
       } else {
         places = list.map((json) => Place.fromJSON(json)).toList();
+        showedList = places;
         body = ListView.builder(
-          itemBuilder: (_, int index) => ItemList(this.places[index], this.locationStatus, this.position),
-          itemCount: this.places.length,
+          itemBuilder: (_, int index) => ItemList(this.showedList[index], this.locationStatus, this.position),
+          itemCount: this.showedList.length,
         );
       }
       setState(() {});
     }).catchError((error) {
-      body = errorWidget(
+      body = ErrorMessage(
         icon: Icons.signal_wifi_off,
         title: 'No se ha podido contactar con el servidor',
         message: 'Revise su conexión',
@@ -65,6 +68,16 @@ class PlacesState extends State<PlacesTab> {
         onPressed: loadPlaces,
       );
     });
+  }
+
+
+
+  void refreshList() {
+    body = ListView.builder(
+      itemBuilder: (_, int index) => ItemList(this.showedList[index], this.locationStatus, this.position),
+      itemCount: this.showedList.length,
+    );
+    setState(() { });
   }
 }
 
@@ -77,7 +90,7 @@ class ItemList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+
     return Card(
       child: Container(
         decoration: BoxDecoration(
@@ -127,15 +140,15 @@ class ItemList extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 10),
-                      ),
-                      Text(
-                        (locationStatus) ? 
-                        "Distancia: " + place.getDistance(locationStatus, position): 
-                        '',
-                        style: TextStyle(
-                          color: Colors.white70
+                        child: Text(
+                          (locationStatus) ? 
+                          "Distancia: " + place.getDistance(locationStatus, position): 
+                          '',
+                          style: TextStyle(
+                            color: Colors.white70
+                          ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                   Padding(
@@ -153,7 +166,11 @@ class ItemList extends StatelessWidget {
                             ],
                           ),
                           textColor: ACCENT_COLOR,
-                          onPressed: (){},
+                          onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => PlaceDetail(place: place)
+                            ));
+                          },
                         ),
                         Padding( padding: EdgeInsets.only(left: 8), ),
                         MaterialButton(

@@ -1,4 +1,4 @@
-import 'package:app/values/functions.dart';
+import 'package:CUValles/values/functions.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong/latlong.dart';
 

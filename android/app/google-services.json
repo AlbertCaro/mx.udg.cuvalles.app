@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "392820778174",
+    "firebase_url": "https://cuvallesapp.firebaseio.com",
+    "project_id": "cuvallesapp",
+    "storage_bucket": "cuvallesapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392820778174:android:868a865922120a64",
+        "android_client_info": {
+          "package_name": "mx.udg.cuvalles.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392820778174-1uvrav5r6lr7a2qcb7p99fv3pr809ccb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBe8EsocdA0fyNI_9iscCVY7fVbmtEDig4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

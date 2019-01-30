@@ -4,7 +4,7 @@
             "outputFile": "/home/albertocaro/Projects/Flutter/app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-pt/values-pt.xml",
             "map": [
                 {
-                    "source": "/home/albertocaro/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/4303ae595a0d8eb34be1947c7e01253d/res/values-pt/values-pt.xml",
+                    "source": "/home/albertocaro/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/5526464b5fe128354d2a75d699fa63b4/res/values-pt/values-pt.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/home/albertocaro/.gradle/caches/transforms-1/files-1.1/zxing-android-embedded-3.5.0.aar/9023d54e547cbb5294d8971a9e79ed2f/res/values-pt/values-pt.xml",
+                    "source": "/home/albertocaro/.gradle/caches/transforms-1/files-1.1/zxing-android-embedded-3.5.0.aar/33df7465c11ae952052a45b547fbfc95/res/values-pt/values-pt.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

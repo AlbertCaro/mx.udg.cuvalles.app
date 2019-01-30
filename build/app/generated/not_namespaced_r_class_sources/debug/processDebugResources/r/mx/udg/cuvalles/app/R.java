@@ -638,11 +638,20 @@ public final class R {
     public static final int common_open_on_phone=0x7f0b000f;
     public static final int common_signin_button_text=0x7f0b0010;
     public static final int common_signin_button_text_long=0x7f0b0011;
-    public static final int status_bar_notification_info_overflow=0x7f0b0012;
-    public static final int zxing_app_name=0x7f0b0013;
-    public static final int zxing_button_ok=0x7f0b0014;
-    public static final int zxing_msg_camera_framework_bug=0x7f0b0015;
-    public static final int zxing_msg_default_status=0x7f0b0016;
+    public static final int default_web_client_id=0x7f0b0012;
+    public static final int fcm_fallback_notification_channel_label=0x7f0b0013;
+    public static final int firebase_database_url=0x7f0b0014;
+    public static final int gcm_defaultSenderId=0x7f0b0015;
+    public static final int google_api_key=0x7f0b0016;
+    public static final int google_app_id=0x7f0b0017;
+    public static final int google_crash_reporting_api_key=0x7f0b0018;
+    public static final int google_storage_bucket=0x7f0b0019;
+    public static final int project_id=0x7f0b001a;
+    public static final int status_bar_notification_info_overflow=0x7f0b001b;
+    public static final int zxing_app_name=0x7f0b001c;
+    public static final int zxing_button_ok=0x7f0b001d;
+    public static final int zxing_msg_camera_framework_bug=0x7f0b001e;
+    public static final int zxing_msg_default_status=0x7f0b001f;
   }
   public static final class style {
     public static final int LaunchTheme=0x7f0c0000;

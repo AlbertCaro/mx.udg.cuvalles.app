@@ -4,7 +4,7 @@
             "outputFile": "/home/albertocaro/Projects/Flutter/app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-pl/values-pl.xml",
             "map": [
                 {
-                    "source": "/home/albertocaro/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/d7da7dd99dad3ed7d709b2c9118e2a5c/res/values-pl/values.xml",
+                    "source": "/home/albertocaro/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/ee7af1225fa1046a07029f39de7846cf/res/values-pl/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -21,7 +21,41 @@
                     }
                 },
                 {
-                    "source": "/home/albertocaro/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/4942f44754912064b86b94ce58d46312/res/values-pl/values.xml",
+                    "source": "/home/albertocaro/.gradle/caches/transforms-1/files-1.1/zxing-android-embedded-3.5.0.aar/33df7465c11ae952052a45b547fbfc95/res/values-pl/values-pl.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,114,161,325",
+                        "endColumns": "58,46,163,109",
+                        "endOffsets": "109,156,320,430"
+                    },
+                    "to": {
+                        "startLines": "22,23,24,25",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "3050,3109,3156,3320",
+                        "endColumns": "58,46,163,109",
+                        "endOffsets": "3104,3151,3315,3425"
+                    }
+                },
+                {
+                    "source": "/home/albertocaro/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/5526464b5fe128354d2a75d699fa63b4/res/values-pl/values-pl.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "21",
+                        "startColumns": "4",
+                        "startOffsets": "2949",
+                        "endColumns": "100",
+                        "endOffsets": "3045"
+                    }
+                },
+                {
+                    "source": "/home/albertocaro/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/0568ca31723e8c855aecba3ae81aece3/res/values-pl/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -38,37 +72,20 @@
                     }
                 },
                 {
-                    "source": "/home/albertocaro/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/4303ae595a0d8eb34be1947c7e01253d/res/values-pl/values-pl.xml",
+                    "source": "/home/albertocaro/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.3.3.aar/feda7e4808771cb71c4bba2e0cfd84fe/res/values-pl/values.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "205",
+                        "endColumns": "98",
+                        "endOffsets": "303"
                     },
                     "to": {
                         "startLines": "20",
                         "startColumns": "4",
                         "startOffsets": "2846",
-                        "endColumns": "100",
-                        "endOffsets": "2942"
-                    }
-                },
-                {
-                    "source": "/home/albertocaro/.gradle/caches/transforms-1/files-1.1/zxing-android-embedded-3.5.0.aar/9023d54e547cbb5294d8971a9e79ed2f/res/values-pl/values-pl.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,114,161,325",
-                        "endColumns": "58,46,163,109",
-                        "endOffsets": "109,156,320,430"
-                    },
-                    "to": {
-                        "startLines": "21,22,23,24",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "2947,3006,3053,3217",
-                        "endColumns": "58,46,163,109",
-                        "endOffsets": "3001,3048,3212,3322"
+                        "endColumns": "102",
+                        "endOffsets": "2944"
                     }
                 }
             ]

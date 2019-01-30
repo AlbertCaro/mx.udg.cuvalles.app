@@ -1,13 +1,13 @@
-import 'package:app/values/constants.dart';
+import 'package:CUValles/values/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_web/flutter_native_web.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class WebTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return FlutterNativeWeb(
-      onWebCreated: (webController) => webController.loadUrl(WEB_TAB_URL),
+    return WebView(
+      initialUrl: WEB_TAB_URL,
     );
   }
 

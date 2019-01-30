@@ -1,26 +1,9 @@
 import 'dart:convert';
 
-import 'package:app/values/constants.dart';
+import 'package:CUValles/values/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
-
-AppBar getAppBar (title, onSelected) {
-  return AppBar(
-    title: Text(title),
-    actions: <Widget>[
-      PopupMenuButton(
-        onSelected: onSelected,
-        itemBuilder: (BuildContext context) => [
-          PopupMenuItem(
-            child: Text('Preferencias'),
-              value: 0,
-          )
-        ]
-      )
-    ],
-  );
-}
 
 Future jsonRequest(path) async {
   var url = SERVER_URL + path;
@@ -39,32 +22,31 @@ Future jsonRequest(path) async {
     
 }
 
-Widget errorWidget({IconData icon, String title, String message, String buttonText, onPressed}) {
-    return Center(
-      child: 
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              icon,
-              color: Colors.black54,
-              size: 160,
-            ),
-            Padding(padding: EdgeInsets.only(top: 16.0),),
-            Text(title,
-              style: TextStyle(
-              fontWeight: FontWeight.bold),
-            ),
-            Padding(padding: EdgeInsets.only(top: 8.0),),
-            Text(message),
-            Padding(padding: EdgeInsets.only(top: 8.0),),
-            MaterialButton(
-              child: Text(buttonText),
-              textColor: ACCENT_COLOR,
-              onPressed: onPressed,
-            )
-          ]
-        ),
-    );
+Widget buildFab({ScrollController controller, FloatingActionButton fab}) {
+  final double defaultTopMargin = 256.0 - 4.0;
+  final double scaleStart = 96.0;
+  final double scaleEnd = scaleStart / 2;
+  double top = 256.0 - 4.0;
+  double scale = 1.0;
+
+  if (controller.hasClients) {
+    double offset = controller.offset;
+    top -= offset;
+    if (offset < defaultTopMargin - scaleStart)
+      scale = 1.0;
+    else if (offset < defaultTopMargin - scaleEnd)
+      scale = (defaultTopMargin - scaleEnd - offset) / scaleEnd;
+    else
+      scale = 0.0;
   }
+  
+  return Positioned(
+    top: top,
+    right: 16.0,
+    child: Transform(
+      transform: Matrix4.identity()..scale(scale),
+      alignment: Alignment.center,
+      child: fab,
+    ),
+  );
+}

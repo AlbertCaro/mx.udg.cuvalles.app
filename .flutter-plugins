@@ -1,9 +1,16 @@
-flutter_native_web=/home/albertocaro/Development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_native_web-1.0.1/
+connectivity=/home/albertocaro/Development/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity-0.3.2/
+device_info=/home/albertocaro/Development/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-0.4.0/
+firebase_messaging=/home/albertocaro/Development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_messaging-2.1.0/
+flutter_webview_plugin=/home/albertocaro/Development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_webview_plugin-0.3.0+2/
 geolocator=/home/albertocaro/Development/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator-2.1.1/
 google_api_availability=/home/albertocaro/Development/flutter/.pub-cache/hosted/pub.dartlang.org/google_api_availability-1.0.4/
 google_maps_flutter=/home/albertocaro/Development/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter-0.0.3+3/
+intro_slider=/home/albertocaro/Development/flutter/.pub-cache/hosted/pub.dartlang.org/intro_slider-1.1.4/
+package_info=/home/albertocaro/Development/flutter/.pub-cache/hosted/pub.dartlang.org/package_info-0.4.0/
 path_provider=/home/albertocaro/Development/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-0.4.1/
 permission=/home/albertocaro/Development/flutter/.pub-cache/hosted/pub.dartlang.org/permission-0.1.0/
 permission_handler=/home/albertocaro/Development/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-2.1.2/
 qr_code_scanner=/home/albertocaro/Development/flutter/.pub-cache/hosted/pub.dartlang.org/qr_code_scanner-0.0.2/
 shared_preferences=/home/albertocaro/Development/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.4.3/
+url_launcher=/home/albertocaro/Development/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher-4.2.0+1/
+webview_flutter=/home/albertocaro/Development/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter-0.2.0/

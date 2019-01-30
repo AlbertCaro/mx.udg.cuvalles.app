@@ -1,5 +1,5 @@
-import 'package:app/models/place.dart';
-import 'package:app/tabs/map.dart';
+import 'package:CUValles/models/place.dart';
+import 'package:CUValles/tabs/map.dart';
 import 'package:flutter/material.dart';
 
 class MapScreen extends StatelessWidget {
