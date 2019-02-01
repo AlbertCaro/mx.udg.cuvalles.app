@@ -11,8 +11,8 @@ class MessagesTab extends StatefulWidget {
 
 class MessagesState extends State<MessagesTab> {
   List<dynamic> messages = [
-    Message("Dos", "Prueba"),
     Message("Uno", "Prueba"),
+    Message("Dos", "PruebaSAFSAFSfSAFSAFAFSAFaSFSAFAFSAFASFASFASfASFFSAFasSADFSADFASDFDIHFHIUADSIUFAIUDSHFIUSIHAUDHIUFIUHSADHFIUIHAUSDIHUFIHSAUDIHFUSAIHDUFIHUDSAHUFHASDHUFHUADSHUFHDSAUFHU"),
   ];
 
   List<dynamic> showedList = [];
@@ -27,7 +27,7 @@ class MessagesState extends State<MessagesTab> {
     return Container(
       color: LIST_BACKGROUND_COLOR,
       child: ListView.builder(
-        reverse: true,
+        reverse: false,
         itemBuilder: (BuildContext context, int index) => ItemList(this.showedList[index]),
         itemCount: this.showedList.length,
       ),
@@ -44,35 +44,13 @@ class ItemList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        padding: EdgeInsets.all(16),
-        child: Row(
-          children: <Widget>[
-            CircleAvatar(
-              backgroundImage: NetworkImage("https://avatarfiles.alphacoders.com/103/103117.gif"),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width-80,
-              padding: EdgeInsets.only(left: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    message.subject,
-                    style: TextStyle(fontSize: 18.0),
-                    textAlign: TextAlign.left,
-                  ),
-                  Text(
-                    message.content,
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: Colors.black54
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ],
-              ),
-            )
-          ],
+        padding: EdgeInsets.all(4),
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage("https://avatarfiles.alphacoders.com/103/103117.gif"),
+          ),
+          title: Text(message.subject),
+          subtitle: Text(message.content),
         ),
       ),
     );
