@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapTab extends StatefulWidget {
-  MapTab({this.place});
+  MapTab({Key key, this.place}) : super(key: key);
   final Place place;
 
   @override
-  State<StatefulWidget> createState() => MapState(place: this.place,);
+  State<StatefulWidget> createState() => MapState();
 }
 
 class MapState extends State<MapTab> {
-  MapState({this.place});
-  Place place;
+  GoogleMapController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +30,26 @@ class MapState extends State<MapTab> {
     );
   }
 
-  void _onMapCreated(GoogleMapController controller) {
-    setState(() { 
-      if (place != null) {
-        controller.addMarker(
+  void reloadMap (Place place) {
+    controller.clearMarkers();
+    
+    setState(() {
+      print(place.name);
+      controller.addMarker(
           MarkerOptions(
             position: LatLng(double.parse(place.lat), double.parse(place.lon))
+          )
+        );
+    });
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    this.controller = controller;
+    setState(() { 
+      if (widget.place != null) {
+        controller.addMarker(
+          MarkerOptions(
+            position: LatLng(double.parse(widget.place.lat), double.parse(widget.place.lon)),
           )
         );
       } else {

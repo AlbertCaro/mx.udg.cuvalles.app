@@ -1,4 +1,5 @@
 import 'package:CUValles/models/place.dart';
+import 'package:CUValles/models/preference.dart';
 import 'package:CUValles/tabs/map.dart';
 import 'package:CUValles/tabs/messages.dart';
 import 'package:CUValles/tabs/moodle.dart';
@@ -18,7 +19,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 
 class App extends StatefulWidget {
-  App({Key key}) : super(key: key);
+  App({Key key, this.preference}) : super(key: key);
+  Preference preference;
 
   @override
   AppState createState() => AppState();
@@ -28,6 +30,7 @@ class App extends StatefulWidget {
 class AppState extends State<App> {
   final GlobalKey newsKey = GlobalKey<NewsState>();
   final GlobalKey placesKey = GlobalKey<PlacesState>();
+  final GlobalKey messagesKey = GlobalKey<MessagesState>();
 
   final FirebaseMessaging messaging = FirebaseMessaging();
   bool locationStatus = false;
@@ -50,15 +53,12 @@ class AppState extends State<App> {
 
   int index = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    
+  AppState() {
     tabs = [
       NewsTab(key: newsKey,),
       WebTab(),
       MoodleTab(),
-      MessagesTab(),
+      MessagesTab(key: messagesKey,),
       MapTab(),
       PlacesTab(placesKey, this.locationStatus, this.position),
       QRTab(),
@@ -74,6 +74,11 @@ class AppState extends State<App> {
       hintText: "Buscar...",
       buildDefaultAppBar: buildAppBar
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
 
     checkPermissions();
 
@@ -106,11 +111,21 @@ class AppState extends State<App> {
         (_new) => _new.title.toLowerCase().contains(value.toLowerCase())
       ).toList();
       state.setState(() {});
+    } else if (index == 3) {
+      MessagesState state = (messagesKey.currentState as MessagesState);
+      state.showedList = state.messages.where(
+        (message) => message.subject.toLowerCase().contains(value.toLowerCase()) ||
+                     message.content.toLowerCase().contains(value.toLowerCase())
+      ).toList();
+      state.setState(() {});
     } else if (index == 5) {
+      print(value);
       PlacesState state = (placesKey.currentState as PlacesState);
       state.showedList = state.places.where(
-        (places) => (places as Place).name.toLowerCase().contains(value.toLowerCase())
+        (place) => place.name.toLowerCase().contains(value.toLowerCase())
       ).toList();
+
+      print("List: "+state.showedList.toString());
       state.refreshList();
     }
   }
@@ -119,6 +134,10 @@ class AppState extends State<App> {
     if (index == 0) {
       NewsState state = (newsKey.currentState as NewsState);
       state.showedList = state.news;
+      state.setState(() {});
+    } else if (index == 3) {
+      MessagesState state = (messagesKey.currentState as MessagesState);
+      state.showedList = state.messages;
       state.setState(() {});
     } else if (index == 5) {
       PlacesState state = (placesKey.currentState as PlacesState);
@@ -191,7 +210,7 @@ class AppState extends State<App> {
     return AppBar(
         title: Text(titles[index]),
         actions: <Widget>[
-          (index == 0 || index == 5) ? searchBar.getSearchAction(context) : Container(),
+          (index == 0 || index == 5 || index == 3) ? searchBar.getSearchAction(context) : Container(),
           PopupMenuButton(
             onSelected: popupOption,
             itemBuilder: (BuildContext context) => [
@@ -295,7 +314,9 @@ class AppState extends State<App> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => Preferences()
+          builder: (context) => Preferences(
+            preference: widget.preference,
+          )
         )
       );
     } else if (option == 1) {

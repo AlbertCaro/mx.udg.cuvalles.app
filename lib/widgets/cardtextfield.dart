@@ -3,7 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class CardTextField extends StatefulWidget {
-  CardTextField({this.obscureText, this.icon, this.hintText, this.controller, this.eye, this.error});
+  CardTextField({
+    this.obscureText,
+    this.icon,
+    this.hintText,
+    this.controller,
+    this.eye,
+    this.error,
+    this.keyboardType
+  });
   
   @required
   bool obscureText, error;
@@ -15,6 +23,8 @@ class CardTextField extends StatefulWidget {
   final TextEditingController controller;
   @required
   final bool eye;
+  TextInputType keyboardType;
+
   @override
   CardTextFieldState createState() => CardTextFieldState();
 }
@@ -43,10 +53,11 @@ class CardTextFieldState extends State<CardTextField> {
                   child: TextFormField(
                     controller: widget.controller,
                     obscureText: widget.obscureText,
+                    keyboardType: widget.keyboardType,
                     decoration: InputDecoration(
                       fillColor: ACCENT_COLOR,
                       border: InputBorder.none,
-                      hintText: widget.hintText,
+                      hintText: widget.hintText[0].toUpperCase()+widget.hintText.substring(1),
                       icon: widget.icon,
                     ),
                   ),
@@ -55,7 +66,7 @@ class CardTextFieldState extends State<CardTextField> {
                 Padding(
                   padding: EdgeInsets.only(left: 12),
                   child: GestureDetector(
-                    onTap: () {setState(() {
+                    onTap: () { setState(() {
                         widget.obscureText = !widget.obscureText;
                         if (widget.obscureText)
                           iconEye = MdiIcons.eye;
@@ -81,7 +92,7 @@ class CardTextFieldState extends State<CardTextField> {
             errorText,
             style: TextStyle(
               color: Colors.red,
-              fontSize: 13,
+              fontSize: 12,
               fontWeight: FontWeight.w700,
               shadows: [
                 Shadow(color: Colors.black, blurRadius: 8, offset: Offset(1, 1))
@@ -94,7 +105,8 @@ class CardTextFieldState extends State<CardTextField> {
   }
 
   Widget validation () {
-    errorText = (widget.error) ? "El campo no puede quedar vacío" : "";
+    iconEye = MdiIcons.eye;
+    errorText = (widget.error) ? "El "+widget.hintText+" no puede quedar vacío" : "";
     
     Widget iconError = Container();
 

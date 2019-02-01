@@ -3,16 +3,23 @@ import 'package:CUValles/values/constants.dart';
 import 'package:flutter/material.dart';
 
 class MessagesTab extends StatefulWidget {
+  MessagesTab({Key key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => MessagesState();
 }
 
 class MessagesState extends State<MessagesTab> {
-  List<Message> list = [
+  List<dynamic> messages = [
     Message("Dos", "Prueba"),
     Message("Uno", "Prueba"),
   ];
+
+  List<dynamic> showedList = [];
+  
+  MessagesState () {
+    showedList = messages;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +28,8 @@ class MessagesState extends State<MessagesTab> {
       color: LIST_BACKGROUND_COLOR,
       child: ListView.builder(
         reverse: true,
-        itemBuilder: (BuildContext context, int index) => ItemList(this.list[index]),
-        itemCount: this.list.length,
+        itemBuilder: (BuildContext context, int index) => ItemList(this.showedList[index]),
+        itemCount: this.showedList.length,
       ),
     );
   }

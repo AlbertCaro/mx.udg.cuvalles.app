@@ -1,3 +1,4 @@
+import 'package:CUValles/models/preference.dart';
 import 'package:CUValles/screens/app.dart';
 import 'package:CUValles/values/constants.dart';
 import 'package:flutter/material.dart';
@@ -8,13 +9,20 @@ import 'package:permission/permission.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Introduction extends StatefulWidget {
+  Introduction({this.preference});
+  final Preference preference;
+
   @override
-  IntroductionState createState() => IntroductionState();
+  IntroductionState createState() => IntroductionState(preference);
 
 }
 
 class IntroductionState extends State<Introduction> {
   bool locationGranted = false, cameraGranted = false;
+
+  IntroductionState(this.preference);
+
+  Preference preference;
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +106,9 @@ class IntroductionState extends State<Introduction> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => App(),
+            builder: (context) => App(
+              preference: widget.preference,
+            ),
           ),
         );
       },

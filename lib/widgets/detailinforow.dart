@@ -2,16 +2,15 @@ import 'package:CUValles/values/constants.dart';
 import 'package:flutter/material.dart';
 
 class DetailInfoRow extends StatelessWidget {
-  DetailInfoRow({this.icon, this.text, this.label, this.divider, this.context});
+  DetailInfoRow({this.icon, this.text, this.label, this.isLargeScreen = false});
 
   final IconData icon;
   final String text, label;
-  final bool divider;
-  final BuildContext context;
+  final bool isLargeScreen;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: EdgeInsets.only(
         top: 16
       ),
@@ -30,7 +29,7 @@ class DetailInfoRow extends StatelessWidget {
               left: 32
             ),
             child: Container(
-              width: MediaQuery.of(this.context).size.width-90,
+              width: MediaQuery.of(context).size.width/2,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -40,7 +39,7 @@ class DetailInfoRow extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                      top: 8,
+                      top: 4,
                       bottom: 16
                     ),
                     child: Text(
@@ -50,7 +49,6 @@ class DetailInfoRow extends StatelessWidget {
                       ),
                     ),
                   ),
-                  (divider) ? Divider() : Container()
                 ],
               ),
             ),

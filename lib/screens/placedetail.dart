@@ -5,28 +5,21 @@ import 'package:CUValles/models/place.dart';
 import 'package:CUValles/screens/map.dart';
 import 'package:CUValles/values/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_device_type/flutter_device_type.dart';
 
 class PlaceDetail extends StatefulWidget {
-  PlaceDetail({this.place});
+  PlaceDetail({Key key, this.place}) : super(key: key);
   final Place place;
 
   @override
-  PlaceDetailState createState() => PlaceDetailState(place: this.place);
+  PlaceDetailState createState() => PlaceDetailState();
 }
 
 class PlaceDetailState extends State<PlaceDetail> with TickerProviderStateMixin {
-  PlaceDetailState({this.place});
-
   ScrollController scrollController;
-  TabController tabController;
 
-  Place place;
-
-  @override
-  void initState() {
-    super.initState();
+  PlaceDetailState() {
     scrollController = ScrollController();
-    tabController = TabController(length: 2, vsync: this);
     scrollController.addListener(() => setState(() {}));
   }
 
@@ -37,8 +30,10 @@ class PlaceDetailState extends State<PlaceDetail> with TickerProviderStateMixin 
       body: Stack(
         children: <Widget>[
           DetailScreen(
-            title: this.place.name,
-            imageUrl: SERVER_URL + this.place.photo,
+            title: this.widget.place.name,
+            contentTitle: this.widget.place.name,
+            hasContentTitle: Device.get().isTablet,
+            imageUrl: SERVER_URL + this.widget.place.photo,
             content: <Widget>[
               Padding(
                 padding: EdgeInsets.only(
@@ -50,29 +45,27 @@ class PlaceDetailState extends State<PlaceDetail> with TickerProviderStateMixin 
                   children: <Widget>[
                     DetailInfoRow(
                       icon: Icons.info_outline,
-                      text: place.description,
+                      text: widget.place.description,
                       label: "Descripción",
-                      divider: true,
-                      context: context
                     ),
+                    Divider(indent: 54,),
                     DetailInfoRow(
                       icon: Icons.phone,
-                      text: place.extension,
+                      text: widget.place.extension,
                       label: "Extensión",
-                      divider: false,
-                      context: context
                     ),
                   ],
                 )
               )
             ],
           ),
+          Device.get().isPhone ?
           SliverFloatingActionButton(
             scrollController: scrollController,
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => MapScreen(place: this.place)
+                  builder: (context) => MapScreen(place: this.widget.place)
                 )
               );
             },
@@ -81,6 +74,7 @@ class PlaceDetailState extends State<PlaceDetail> with TickerProviderStateMixin 
               color: Colors.white
             ),
           )
+          : Container()
         ],
       ),
     );
