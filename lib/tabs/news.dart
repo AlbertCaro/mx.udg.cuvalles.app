@@ -13,7 +13,7 @@ class NewsTab extends StatefulWidget {
 
 }
 
-class NewsState extends State<NewsTab> {
+class NewsState extends State<NewsTab> with TickerProviderStateMixin {
   New selectedNew;
 
   List<dynamic> news = [
@@ -127,15 +127,28 @@ class NewsState extends State<NewsTab> {
   ];
 
   List<dynamic> showedList = [];
+  AnimationController controller;
 
   NewsState() {
     showedList = news;
-    selectedNew = showedList[0];
+    selectedNew = showedList[ItemList.selected];
+
   }
 
   @override
   Widget build(BuildContext context) {
 
+    controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 700)
+    );
+    
+    final animation = Tween(
+      begin: 0,
+      end: 1
+    ).animate(controller);
+
+    controller.forward();
     return Row(
       children: <Widget>[
         Expanded(
@@ -146,13 +159,17 @@ class NewsState extends State<NewsTab> {
               reverse: false,
               itemCount: this.showedList.length,
               itemBuilder: listBuilder,
+              shrinkWrap: true,
             ),
           ),
         ),
         Device.get().isTablet && selectedNew != null ? Expanded (
           flex: 2,
-          child: NewDeatil(
-            newObject: selectedNew,
+          child: FadeTransition(
+            opacity: controller,
+            child: NewDeatil(
+              newObject: selectedNew,
+            ),
           )
         ) : Container()
       ],
@@ -161,10 +178,15 @@ class NewsState extends State<NewsTab> {
 
   Widget listBuilder (BuildContext, int index) => ItemList(
     newObject: this.showedList[index],
+    itemNumber: index,
     onTap: () {
       if (Device.get().isTablet){
-        selectedNew = this.showedList[index];
-        setState(() {});
+        if (ItemList.selected != index) {
+          ItemList.selected = index;
+          selectedNew = this.showedList[ItemList.selected];
+          print(ItemList.selected.toDouble());
+          setState(() {});
+        }
       } else {
         Navigator.of(context).push(
           MaterialPageRoute(
@@ -178,7 +200,9 @@ class NewsState extends State<NewsTab> {
 }
 
 class ItemList extends StatelessWidget {
-  ItemList({this.newObject, this.onTap});
+  ItemList({this.newObject, this.onTap, this.itemNumber});
+  static int selected = 0;
+  int itemNumber;
   final New newObject;
   Function onTap;
 
@@ -187,68 +211,78 @@ class ItemList extends StatelessWidget {
 
     return GestureDetector(
       onTap: onTap,
-      child: Card(
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: CachedNetworkImageProvider(this.newObject.photo),
-              fit: BoxFit.cover
-            )
-          ),
-          child: Padding(
-            padding: EdgeInsets.only(top: 90),
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Color.fromRGBO(0, 0, 0, 0.8),
-                    Color.fromRGBO(0, 0, 0, 0.8),
-                    Color.fromRGBO(0, 0, 0, 0.8),
-                    Color.fromRGBO(0, 0, 0, 0.8),
-                    Color.fromRGBO(0, 0, 0, 0.7),
-                    Color.fromRGBO(0, 0, 0, 0.7),
-                    Color.fromRGBO(0, 0, 0, 0.6),
-                    Color.fromRGBO(0, 0, 0, 0.6),
-                    Color.fromRGBO(0, 0, 0, 0.5),
-                    Color.fromRGBO(0, 0, 0, 0.4)
-                  ]
-                )
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      this.newObject.title,
-                      style: TextStyle(
-                      color: Colors.white,
-                        fontSize: 18
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 4, bottom: 4),
-                      child: Text(
-                        this.newObject.resume,
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 250),
+        padding: EdgeInsets.only(
+          left: itemNumber == selected || Device.get().isPhone ? 0 : 8,
+          right: itemNumber == selected || Device.get().isPhone ? 0 : 8
+        ),
+        child: Card(
+          elevation: itemNumber == selected ? 8 : 0,
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 250),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: CachedNetworkImageProvider(this.newObject.photo),
+                fit: BoxFit.cover
+              )
+            ),
+            child: AnimatedPadding(
+              duration: Duration(milliseconds: 250),
+              padding: EdgeInsets.only(top: itemNumber == selected && Device.get().isTablet? 175 : 75,),
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color.fromRGBO(0, 0, 0, 0.8),
+                      Color.fromRGBO(0, 0, 0, 0.8),
+                      Color.fromRGBO(0, 0, 0, 0.8),
+                      Color.fromRGBO(0, 0, 0, 0.8),
+                      Color.fromRGBO(0, 0, 0, 0.7),
+                      Color.fromRGBO(0, 0, 0, 0.7),
+                      Color.fromRGBO(0, 0, 0, 0.6),
+                      Color.fromRGBO(0, 0, 0, 0.6),
+                      Color.fromRGBO(0, 0, 0, 0.5),
+                      Color.fromRGBO(0, 0, 0, 0.4)
+                    ]
+                  )
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        this.newObject.title,
                         style: TextStyle(
-                        color: Colors.white70,
+                        color: Colors.white,
+                          fontSize: 18
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 4, bottom: 4),
+                        child: Text(
+                          this.newObject.resume,
+                          style: TextStyle(
+                          color: Colors.white70,
+                            fontSize: 14
+                          ),
+                        ),
+                      ),
+                      Text(
+                        this.newObject.date,
+                        style: TextStyle(
+                        color: Colors.white54,
                           fontSize: 14
                         ),
                       ),
-                    ),
-                    Text(
-                      this.newObject.date,
-                      style: TextStyle(
-                      color: Colors.white54,
-                        fontSize: 14
-                      ),
-                    ),
-                  ],
-                ),
-              )
+                    ],
+                  ),
+                )
+              ),
             ),
-          ),
-        )
+          )
+        ),
       ),
     );
   }

@@ -6,10 +6,10 @@ void main() => runApp(
   MaterialApp(
     title: APP_TITLE,
     theme: ThemeData(
-        primarySwatch: Colors.indigo,
-        primaryColor: PRIMARY_COLOR,
-        accentColor: ACCENT_COLOR,
-        textSelectionColor: ACCENT_COLOR,
+      primarySwatch: Colors.indigo,
+      primaryColor: PRIMARY_COLOR,
+      accentColor: ACCENT_COLOR,
+      textSelectionColor: ACCENT_COLOR,
     ),
     home: Splash(),
     debugShowCheckedModeBanner: false,
