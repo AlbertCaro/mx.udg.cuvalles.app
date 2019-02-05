@@ -1,6 +1,6 @@
-# app
+# mx.udg.cuvalles.app (CUValles APP)
 
-Aplicación del Centro Universitario de los Valles.
+Remake de la aplicación oficial del Centro Universitario de los Valles, en Flutter.
 
 ## Getting Started
 
