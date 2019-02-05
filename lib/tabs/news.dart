@@ -4,6 +4,7 @@ import 'package:CUValles/values/constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_device_type/flutter_device_type.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class NewsTab extends StatefulWidget {
   NewsTab({Key key}) : super(key: key);
@@ -261,12 +262,13 @@ class ItemList extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 4, bottom: 4),
-                        child: Text(
+                        child: AutoSizeText(
                           this.newObject.resume,
                           style: TextStyle(
                           color: Colors.white70,
                             fontSize: 14
                           ),
+                          maxLines: 3,
                         ),
                       ),
                       Text(
