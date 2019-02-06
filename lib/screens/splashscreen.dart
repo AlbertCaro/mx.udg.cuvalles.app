@@ -1,4 +1,5 @@
 import 'package:CUValles/models/preference.dart';
+import 'package:CUValles/models/user.dart';
 import 'package:CUValles/screens/app.dart';
 import 'package:CUValles/screens/introduction.dart';
 import 'package:CUValles/values/constants.dart';
@@ -15,6 +16,7 @@ class Splash extends StatefulWidget {
 class SplashState extends State<Splash> {
   Future<SharedPreferences> preferences = SharedPreferences.getInstance();
   Preference preference;
+  User user;
   bool firstOpen = true;
 
   SplashState() {
@@ -25,6 +27,8 @@ class SplashState extends State<Splash> {
     preferences.then((preferences) {
       setState(() { firstOpen = (preferences.getBool("first_open") ?? true); });
     });
+
+    user = User(code: '215818158', name: 'CARO NAVARRO ALBERTO', career: 'Tecnologías de la Información');
   }
 
   @override

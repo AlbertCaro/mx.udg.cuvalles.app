@@ -19,7 +19,6 @@ class PreferencesState extends State<Preferences> {
   Preference preference;
   PackageInfo packageInfo;
   DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-  bool mobileNetworkDisabled = false;
   String deviceModel = "", 
          osVersion = "",
          appName = "",
@@ -49,30 +48,23 @@ class PreferencesState extends State<Preferences> {
     buildNumber = packageInfo.buildNumber;
     appPackage = packageInfo.packageName;
 
-    setState(() {
-      mobileNetworkDisabled = !preference.synchronization;
-    });
+    setState(() { });
   }
 
-  void changePush (bool value) async {
-    setState(() { preference.setPush(value); });
+  void changePush (bool value) => setState(() { preference.push = value; });
+
+  void changeSync (bool value) {
+    if (!value) changeMobileNetwork(value);
+    setState(() { preference.synchronization = value; });
   }
+
+  void changeMobileNetwork (bool value) => setState(() { preference.syncUsesMobileNetwork = value; });
+
+  void changeMobileNetworkButton () => changeMobileNetwork(!preference.syncUsesMobileNetwork);
 
   void changePushButton () => changePush(!preference.push);
 
-  void changeSync (bool value) async {
-    mobileNetworkDisabled = !value;
-    if (mobileNetworkDisabled) changeMobileNetwork(value);
-    setState(() { preference.setSynchronization(value); });
-  }
-
   void changeSyncButton () => changeSync(!preference.synchronization);
-
-  void changeMobileNetwork (bool value) async {
-    setState(() { preference.setUsesMobileNetwork(value); });
-  }
-
-  void changeMobileNetworkButton () => changeMobileNetwork(!preference.syncUsesMobileNetwork);
 
   @override
   Widget build(BuildContext context) {
@@ -126,10 +118,10 @@ class PreferencesState extends State<Preferences> {
                 description: "Permitir a la aplicación sincronizarse cuando esté conectado a redes móviles.",
                 action: Switch(
                   value: preference.syncUsesMobileNetwork,
-                  onChanged: !mobileNetworkDisabled ? changeMobileNetwork : null,
+                  onChanged: preference.synchronization ? changeMobileNetwork : null,
                 ),
                 divider: false,
-                disabled: mobileNetworkDisabled,
+                disabled: !preference.synchronization,
                 onTap: changeMobileNetworkButton,
               ),
               ListTitle(
@@ -175,7 +167,7 @@ class PreferencesState extends State<Preferences> {
               ItemList(
                 title: "Acerca de",
                 description: "Información sobre esta aplicación y licencias de código abierto.",
-                divider: true,
+                divider: false,
                 onTap: () {
                   showAboutDialog(
                     context: context,

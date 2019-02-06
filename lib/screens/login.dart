@@ -117,7 +117,7 @@ class LoginFormState extends State<LoginForm> {
           icon: Icon(Icons.account_circle),
           obscureText: false,
           hintText: "código",
-          keyboardType: TextInputType.numberWithOptions(decimal: false, signed: false),
+          keyboardType: TextInputType.number,
           eye: false,
           error: codeError,
         ),

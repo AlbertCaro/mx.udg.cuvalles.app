@@ -12,7 +12,6 @@ void main() => runApp(
       textSelectionColor: ACCENT_COLOR,
     ),
     home: Splash(),
-    debugShowCheckedModeBanner: false,
   )
 );
 

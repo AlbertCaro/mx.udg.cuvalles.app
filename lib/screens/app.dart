@@ -1,5 +1,6 @@
-import 'package:CUValles/models/place.dart';
+import 'package:CUValles/components/drawerheader.dart';
 import 'package:CUValles/models/preference.dart';
+import 'package:CUValles/models/user.dart';
 import 'package:CUValles/tabs/map.dart';
 import 'package:CUValles/tabs/messages.dart';
 import 'package:CUValles/tabs/moodle.dart';
@@ -11,6 +12,7 @@ import 'package:CUValles/tabs/places.dart';
 import 'package:CUValles/tabs/qr.dart';
 import 'package:CUValles/values/constants.dart';
 import 'package:CUValles/widgets/listtitle.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -19,8 +21,9 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 
 class App extends StatefulWidget {
-  App({Key key, this.preference}) : super(key: key);
+  App({Key key, this.preference, this.user}) : super(key: key);
   Preference preference;
+  User user;
 
   @override
   AppState createState() => AppState();
@@ -232,6 +235,8 @@ class AppState extends State<App> {
       );
   }
 
+  bool userDetailOpened = false;
+
   @override
   Widget build(BuildContext context) {
 
@@ -242,55 +247,26 @@ class AppState extends State<App> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/images/header.jpg"),
-                ),
-              ),
-              accountName: Text("Alberto Caro Navarro"),
-              accountEmail: Text("Tecnologías de la Información"),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: NetworkImage("http://148.202.89.11/spec/Fotos/CARO%20NAVARRO%20ALBERTO.jpg")
-              ),
+            Header(
+              onDetailPressed: () {
+                setState(() {
+                  userDetailOpened = !userDetailOpened;
+                });
+              },
+              user: widget.user,
             ),
-            item(Icon(MdiIcons.newspaper), 0, context),
-            item(Icon(MdiIcons.web), 1, context),
-            ListTile(
-              leading: Icon(Icons.school),
-              title: Text('Moodle'),
-              onTap: () { 
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => MoodleTab()
-                  )
-                );
-              }
-            ),
-            //item(Icon(Icons.school), 2, context),
-            item(Stack(children: <Widget>[
-              Icon(Icons.message),
-              Positioned(
-                top: -1.0,
-                right: -1.0,
-                child: Stack(
-                  children: <Widget>[
-                    badge
-                  ],
+            userDetailOpened ?
+            Column(
+              children: <Widget>[
+                ListTile(
+                  leading: Icon(MdiIcons.login),
+                  title: Text("Iniciar sesión"),
+                  onTap: () { 
+                  },
                 )
-              )
-            ],
-            ),3, context),
-            item(Icon(Icons.map), 4, context),
-            item(Icon(Icons.place), 5, context),
-            Divider(),
-            ListTitle(
-              text: "Checadores",
-              color: Colors.black54,
-            ),
-            item(Icon(MdiIcons.languageSwift), 6, context),
-            item(Icon(MdiIcons.translate), 7, context),
+              ],
+            )
+            : drawerMenu(context)
           ],
         ),
       ),
@@ -336,4 +312,48 @@ class AppState extends State<App> {
       );
     }
   }
+
+
+  Widget drawerMenu(context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      item(Icon(MdiIcons.newspaper), 0, context),
+      item(Icon(MdiIcons.web), 1, context),
+      ListTile(
+        leading: Icon(Icons.school),
+        title: Text('Moodle'),
+        onTap: () { 
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => MoodleTab()
+            )
+          );
+        }
+      ),
+      //item(Icon(Icons.school), 2, context),
+      item(Stack(
+        children: <Widget>[
+          Icon(Icons.message),
+          Positioned(
+            top: -1.0,
+            right: -1.0,
+            child: Stack(
+              children: <Widget>[
+                badge
+              ],
+            )
+          )
+        ],
+      ), 3, context),
+      item(Icon(Icons.map), 4, context),
+      item(Icon(Icons.place), 5, context),
+      Divider(),
+      ListTitle(
+        text: "Checadores",
+        color: Colors.black54,
+      ),
+      item(Icon(MdiIcons.languageSwift), 6, context),
+      item(Icon(MdiIcons.translate), 7, context),
+    ],
+  );
 }

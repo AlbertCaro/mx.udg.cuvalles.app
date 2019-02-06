@@ -12,18 +12,18 @@ class Preference {
 
   SharedPreferences _preferences;
 
-  void setPush(bool value) async {
+  set push(bool value) {
     _push = value;
     _preferences.setBool(PUSH_KEY, value);
   }
 
-  void setSynchronization(bool value) async {
+  set synchronization(bool value) {
     _synchronization = value;
     _preferences.setBool(SYNCHRONIZATION_KEY, value);
   }
 
-  void setUsesMobileNetwork(bool value) {
-    _synchronization = value;
+  set syncUsesMobileNetwork(bool value) {
+    _syncUsesMobileNetwork = value;
     _preferences.setBool(USES_MOBILE_NETWORK_KEY, value);
   }
 
